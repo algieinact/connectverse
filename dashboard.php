@@ -36,6 +36,7 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,59 +44,61 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary-red: #dc3545;
-            --dark-bg: #212529;
-        }
-        
-        .navbar-brand {
-            font-weight: bold;
-            color: var(--primary-red) !important;
-        }
-        
-        .btn-primary {
-            background: var(--primary-red);
-            border-color: var(--primary-red);
-        }
-        
-        .btn-primary:hover {
-            background: #c82333;
-            border-color: #c82333;
-        }
-        
-        .card {
-            border: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        
-        .card:hover {
-            transform: translateY(-2px);
-        }
-        
-        .community-card, .event-card {
-            height: 300px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-img-top {
-            height: 150px;
-            object-fit: cover;
-        }
-        
-        .stats-card {
-            background: linear-gradient(135deg, var(--primary-red), #c82333);
-            color: white;
-        }
-        
-        .welcome-section {
-            background: linear-gradient(135deg, var(--dark-bg), var(--primary-red));
-            color: white;
-            padding: 3rem 0;
-        }
+    :root {
+        --primary-red: #dc3545;
+        --dark-bg: #212529;
+    }
+
+    .navbar-brand {
+        font-weight: bold;
+        color: var(--primary-red) !important;
+    }
+
+    .btn-primary {
+        background: var(--primary-red);
+        border-color: var(--primary-red);
+    }
+
+    .btn-primary:hover {
+        background: #c82333;
+        border-color: #c82333;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+    }
+
+    .community-card,
+    .event-card {
+        height: 300px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .stats-card {
+        background: linear-gradient(135deg, var(--primary-red), #c82333);
+        color: white;
+    }
+
+    .welcome-section {
+        background: linear-gradient(135deg, var(--dark-bg), var(--primary-red));
+        color: white;
+        padding: 3rem 0;
+    }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
@@ -122,7 +125,10 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="my_activities.php">Aktivitas Saya</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
                     </li>
@@ -136,7 +142,8 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h1 class="display-5 fw-bold">Selamat Datang, <?php echo htmlspecialchars($user['full_name']); ?>!</h1>
+                    <h1 class="display-5 fw-bold">Selamat Datang, <?php echo htmlspecialchars($user['full_name']); ?>!
+                    </h1>
                     <p class="lead">Temukan komunitas dan event yang sesuai dengan minat Anda</p>
                 </div>
                 <div class="col-md-4 text-end">
@@ -175,11 +182,11 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <i class="fas fa-plus fa-3x mb-3"></i>
                     <h4>Buat Konten</h4>
                     <?php if ($user['role'] === 'community_admin'): ?>
-                        <a href="create_community.php" class="btn btn-light mt-2">Buat Komunitas</a>
+                    <a href="create_community.php" class="btn btn-light mt-2">Buat Komunitas</a>
                     <?php elseif ($user['role'] === 'event_provider'): ?>
-                        <a href="create_event.php" class="btn btn-light mt-2">Buat Event</a>
+                    <a href="create_event.php" class="btn btn-light mt-2">Buat Event</a>
                     <?php else: ?>
-                        <small class="text-light">Upgrade akun untuk membuat konten</small>
+                    <small class="text-light">Upgrade akun untuk membuat konten</small>
                     <?php endif; ?>
                 </div>
             </div>
@@ -193,21 +200,25 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-md-4 mb-4">
                     <div class="card community-card">
                         <?php if ($community['profile_picture']): ?>
-                            <img src="<?php echo htmlspecialchars($community['profile_picture']); ?>" class="card-img-top" alt="Community Image">
+                        <img src="<?php echo htmlspecialchars($community['profile_picture']); ?>" class="card-img-top"
+                            alt="Community Image">
                         <?php else: ?>
-                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
-                                <i class="fas fa-users fa-3x text-muted"></i>
-                            </div>
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
+                            <i class="fas fa-users fa-3x text-muted"></i>
+                        </div>
                         <?php endif; ?>
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($community['name']); ?></h5>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    <i class="fas fa-tag"></i> <?php echo htmlspecialchars($community['category_name']); ?>
+                                    <i class="fas fa-tag"></i>
+                                    <?php echo htmlspecialchars($community['category_name']); ?>
                                 </small>
                             </p>
-                            <p class="card-text"><?php echo htmlspecialchars(substr($community['description'], 0, 100)); ?>...</p>
-                            <a href="community_detail.php?id=<?php echo $community['id']; ?>" class="btn btn-primary btn-sm">Lihat Detail</a>
+                            <p class="card-text">
+                                <?php echo htmlspecialchars(substr($community['description'], 0, 100)); ?>...</p>
+                            <a href="community_detail.php?id=<?php echo $community['id']; ?>"
+                                class="btn btn-primary btn-sm">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -223,11 +234,12 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-md-4 mb-4">
                     <div class="card event-card">
                         <?php if ($event['profile_picture']): ?>
-                            <img src="<?php echo htmlspecialchars($event['profile_picture']); ?>" class="card-img-top" alt="Event Image">
+                        <img src="<?php echo htmlspecialchars($event['profile_picture']); ?>" class="card-img-top"
+                            alt="Event Image">
                         <?php else: ?>
-                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
-                                <i class="fas fa-calendar fa-3x text-muted"></i>
-                            </div>
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
+                            <i class="fas fa-calendar fa-3x text-muted"></i>
+                        </div>
                         <?php endif; ?>
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($event['name']); ?></h5>
@@ -237,13 +249,15 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </small>
                             </p>
                             <p class="card-text">
-                                <i class="fas fa-calendar"></i> <?php echo date('d M Y', strtotime($event['start_date'])); ?>
+                                <i class="fas fa-calendar"></i>
+                                <?php echo date('d M Y', strtotime($event['start_date'])); ?>
                             </p>
                             <p class="card-text">
-                                <i class="fas fa-money-bill"></i> 
+                                <i class="fas fa-money-bill"></i>
                                 <?php echo $event['price'] > 0 ? 'Rp ' . number_format($event['price'], 0, ',', '.') : 'Gratis'; ?>
                             </p>
-                            <a href="event_detail.php?id=<?php echo $event['id']; ?>" class="btn btn-primary btn-sm">Lihat Detail</a>
+                            <a href="event_detail.php?id=<?php echo $event['id']; ?>"
+                                class="btn btn-primary btn-sm">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -254,4 +268,5 @@ $upcoming_events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

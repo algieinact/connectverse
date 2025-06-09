@@ -61,16 +61,44 @@ CREATE TABLE events (
     FOREIGN KEY (provider_id) REFERENCES users(id)
 );
 
--- Tabel Event Bookings
+-- Create transactions table first
+CREATE TABLE transactions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    event_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_method ENUM('transfer', 'ewallet') NOT NULL,
+    payment_proof VARCHAR(255) NULL,
+    status ENUM('pending', 'paid', 'failed', 'cancelled') DEFAULT 'pending',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (event_id) REFERENCES events(id)
+);
+
+-- Tabel Event Bookings (moved after transactions table)
 CREATE TABLE event_bookings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     event_id INT,
     user_id INT,
-    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('pending', 'paid', 'cancelled') DEFAULT 'pending',
+    booking_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('pending', 'paid', 'cancelled', 'rejected') DEFAULT 'pending',
     total_price DECIMAL(10,2),
+    transaction_id INT NULL,
     FOREIGN KEY (event_id) REFERENCES events(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (transaction_id) REFERENCES transactions(id)
+);
+
+-- Create user_communities table
+CREATE TABLE IF NOT EXISTS user_communities (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    community_id INT NOT NULL,
+    role ENUM('member', 'admin') DEFAULT 'member',
+    joined_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (community_id) REFERENCES communities(id)
 );
 
 -- Insert sample categories

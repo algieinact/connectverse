@@ -1,7 +1,7 @@
 <?php
 // Database configuration
 $host = 'localhost';
-$dbname = 'connectverse';
+$dbname = 'connectverse_db';
 $username = 'root';
 $password = '';
 
