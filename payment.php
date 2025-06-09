@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,45 +72,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary-red: #dc3545;
-            --dark-bg: #212529;
-        }
-        
-        .navbar-brand {
-            font-weight: bold;
-            color: var(--primary-red) !important;
-        }
-        
-        .btn-primary {
-            background: var(--primary-red);
-            border-color: var(--primary-red);
-        }
-        
-        .btn-primary:hover {
-            background: #c82333;
-            border-color: #c82333;
-        }
-        
-        .page-header {
-            background: var(--dark-bg);
-            color: white;
-            padding: 2rem 0;
-        }
-        
-        .card {
-            border: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .event-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
+    :root {
+        --primary-red: #dc3545;
+        --dark-bg: #212529;
+    }
+
+    .navbar-brand {
+        font-weight: bold;
+        color: var(--primary-red) !important;
+    }
+
+    .btn-primary {
+        background: var(--primary-red);
+        border-color: var(--primary-red);
+    }
+
+    .btn-primary:hover {
+        background: #c82333;
+        border-color: #c82333;
+    }
+
+    .page-header {
+        background: var(--dark-bg);
+        color: white;
+        padding: 2rem 0;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
@@ -137,7 +139,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="my_activities.php">Aktivitas Saya</a></li>
                             <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="my_activities.php">Aktivitas Saya</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
                     </li>
@@ -158,29 +163,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <?php if ($error): ?>
-                    <div class="alert alert-danger alert-dismissible fade show">
-                        <?php echo htmlspecialchars($error); ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <?php echo htmlspecialchars($error); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
                 <?php endif; ?>
 
                 <?php if ($success): ?>
-                    <div class="alert alert-success alert-dismissible fade show">
-                        <?php echo htmlspecialchars($success); ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+                <div class="alert alert-success alert-dismissible fade show">
+                    <?php echo htmlspecialchars($success); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
                 <?php endif; ?>
 
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-4">
                             <?php if ($booking['profile_picture']): ?>
-                                <img src="<?php echo htmlspecialchars($booking['profile_picture']); ?>" 
-                                     alt="Event Image" class="event-image me-3">
+                            <img src="<?php echo htmlspecialchars($booking['profile_picture']); ?>" alt="Event Image"
+                                class="event-image me-3">
                             <?php else: ?>
-                                <div class="event-image me-3 bg-light d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-calendar fa-2x text-muted"></i>
-                                </div>
+                            <div class="event-image me-3 bg-light d-flex align-items-center justify-content-center">
+                                <i class="fas fa-calendar fa-2x text-muted"></i>
+                            </div>
                             <?php endif; ?>
                             <div>
                                 <h5 class="mb-1"><?php echo htmlspecialchars($booking['event_name']); ?></h5>
@@ -225,4 +230,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+
+</html>

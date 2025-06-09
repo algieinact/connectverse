@@ -154,9 +154,9 @@ if ($action === 'list' && $community_id) {
                     <a class="nav-link active" href="members.php">
                         <i class="fas fa-user-friends me-2"></i> Kelola Member
                     </a>
-                    <a class="nav-link" href="profile.php">
+                    <!-- <a class="nav-link" href="profile.php">
                         <i class="fas fa-user me-2"></i> Profil
-                    </a>
+                    </a> -->
                     <a class="nav-link" href="logout.php">
                         <i class="fas fa-sign-out-alt me-2"></i> Logout
                     </a>
@@ -253,7 +253,8 @@ if ($action === 'list' && $community_id) {
                                         <div>
                                             <h5 class="card-title mb-0">
                                                 <?php echo htmlspecialchars($member['full_name']); ?></h5>
-                                            <small class="text-muted"><?php echo htmlspecialchars($member['email']); ?></small>
+                                            <small
+                                                class="text-muted"><?php echo htmlspecialchars($member['email']); ?></small>
                                         </div>
                                     </div>
 
@@ -306,4 +307,4 @@ if ($action === 'list' && $community_id) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-</html> 
+</html>
